@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "^ is the start of the input, not of the token, so (?:^a) cannot match after b."
+}

@@ -1,0 +1,4 @@
+ab
+ab\n
+a\nb!
+a\nb?

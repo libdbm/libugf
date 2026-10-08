@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "Class intersection with && and nested classes are outside the portable subset."
+}

@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "\\p{L} is the Unicode letter category, which includes e with an acute accent."
+}

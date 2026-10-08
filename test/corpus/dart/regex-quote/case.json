@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "\\Q...\\E quoting is outside the portable subset: only ASCII punctuation may follow a backslash to stand for itself."
+}

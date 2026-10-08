@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "\\h is outside the portable subset."
+}

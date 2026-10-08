@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# Actions are pinned to full commit SHAs; the comment names the release.
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d # v1.8.1
+        with:
+          sdk: stable
+
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed lib test tool example
+      - run: dart analyze --fatal-infos
+      - run: dart doc --dry-run
+
+  # Each run includes the conformance corpus (test/corpus); the ports and the
+  # other tests that read files run on the VM only.
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: vm
+            command: dart test -p vm
+          - name: chrome
+            command: dart test -p chrome
+          - name: wasm
+            command: dart test -p chrome --compiler dart2wasm
+    name: test (${{ matrix.name }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d # v1.8.1
+        with:
+          sdk: stable
+
+      - run: dart pub get
+      - run: ${{ matrix.command }}
+
+  # The owner publishes manually; this checks the package would be accepted.
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      # pana checks Flutter SDK support, so it needs Flutter, which brings Dart.
+      - name: Set up Flutter
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          channel: stable
+
+      - run: dart pub get
+      - run: dart pub publish --dry-run
+      - run: dart pub global activate pana
+      - run: dart pub global run pana --no-warning --exit-code-threshold 0 .

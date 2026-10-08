@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "Atomic groups (?>...) are outside the portable subset."
+}

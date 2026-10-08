@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "\\s is the ASCII set [ \\t\\n\\x0B\\f\\r], so it does not match U+00A0."
+}

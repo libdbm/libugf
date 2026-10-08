@@ -1,0 +1,17 @@
+name: libugf
+description: A pure Dart unification grammar parser with Earley-style chart parsing and feature structure unification.
+version: 2.0.0
+repository: https://github.com/libdbm/libugf
+topics:
+  - parser
+  - grammar
+  - nlp
+  - unification
+  - earley
+
+environment:
+  sdk: ^3.13.0
+
+dev_dependencies:
+  lints: ^6.1.0
+  test: ^1.25.0

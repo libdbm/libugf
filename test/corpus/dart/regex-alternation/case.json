@@ -1,0 +1,7 @@
+{
+  "rules": [
+    "S-L7",
+    "S-G1"
+  ],
+  "description": "s has no nonterminal, so it is one lexical production (S-G1) whose pattern is (?:a|ab) then a literal dot; within one pattern, alternation backtracks to ab when a cannot be followed by the dot."
+}

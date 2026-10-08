@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "The default whitespace is the ASCII \\s+, so U+00A0 is not skipped and becomes an error token."
+}

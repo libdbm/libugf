@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "\\b sees the input before the token: there is no boundary between x and a."
+}

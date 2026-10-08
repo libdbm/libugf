@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "\\A and \\z are outside the portable subset: ^ and $ already mean the start and end of the input."
+}

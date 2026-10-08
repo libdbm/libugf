@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": ". matches one code point, including one outside the Basic Multilingual Plane."
+}

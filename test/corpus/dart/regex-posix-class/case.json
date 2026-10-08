@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "\\p{Alpha} names no Unicode general category, so it is outside the portable subset."
+}

@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "(?i) is outside the portable subset, and a grammar regex element takes no flag."
+}

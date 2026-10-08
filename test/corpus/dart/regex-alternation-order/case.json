@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "Alternation takes the first option that leads to a match, as every engine the subset is portable across does: (?:a|ab) matches a, so b is left unmatched."
+}

@@ -1,0 +1,6 @@
+{
+  "rules": [
+    "S-L7"
+  ],
+  "description": "Possessive quantifiers are outside the portable subset."
+}

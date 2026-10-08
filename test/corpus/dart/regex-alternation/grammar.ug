@@ -1,0 +1,3 @@
+start s;
+s --> (?:a|ab) '.';
+word --> [a-z]+;

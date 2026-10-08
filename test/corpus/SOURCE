@@ -1,0 +1,8 @@
+Synced by tool/sync_corpus.dart from https://github.com/libdbm/unifica
+commit 1ce922a184fc1543a4e756a541cd51a656f363aa
+
+Left out until upstream confirms their licence (SPEC D11):
+- ports/clojure and cases/port-clojure
+- ports/json and cases/port-json
+- ports/properties and cases/port-properties
+- ports/smalltalk and cases/port-smalltalk

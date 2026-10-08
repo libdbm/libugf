@@ -1,0 +1,6 @@
+start S;
+S --> A;
+S --> W:w '!' where matches(w, '(?s)a.b');
+S --> W:w '?' where matches(w, 'a.b');
+A --> [a-z]+(?=$);
+W --> [a][\n][b];
