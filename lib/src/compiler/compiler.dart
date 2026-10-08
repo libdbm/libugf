@@ -321,7 +321,7 @@ final class Compiler {
       _shared(pattern, _portable(symbol, pattern)),
       label,
     ),
-    TokenMatch(:final label) => Any(label),
+    TokenMatch(:final label, :final features) => Any(label, features),
     final Repetition repetition => Named(
       _repeat(symbol, repetition),
       null,
@@ -344,7 +344,7 @@ final class Compiler {
 
   Element _reject(String error) {
     _errors.add(error);
-    return const Any();
+    return Any();
   }
 
   // Lowering (S-G4, S-G5).
@@ -383,7 +383,7 @@ final class Compiler {
 
   static void _variables(RuleElement element, Set<String> names) {
     switch (element) {
-      case Nonterminal(:final features):
+      case Nonterminal(:final features) || TokenMatch(:final features):
         _values(features, names);
       case Repetition(element: final inner):
         _variables(inner, names);

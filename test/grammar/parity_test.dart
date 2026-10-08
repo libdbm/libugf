@@ -95,7 +95,10 @@ Object? item(RuleElement element) => switch (element) {
     'alternation': [for (final option in options) item(option)],
   },
   StateAnnotation(:final state) => {'state': state},
-  TokenMatch(:final label) => {'token': label},
+  TokenMatch(:final label, :final features) => {
+    'token': label,
+    'features': value(features),
+  },
 };
 
 Object? expression(Expression node) => switch (node) {

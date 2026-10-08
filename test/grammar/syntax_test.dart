@@ -19,7 +19,7 @@ GrammarRule only(String source, String symbol) =>
 const x = Variable(r'$X');
 Call call(String name, [List<Value> args = const [x]]) => Call(name, args);
 
-/// The 2.0 grammar syntax (`UnificationGrammar.g4` at unifica 1ce922a).
+/// The 2.1 grammar syntax (`UnificationGrammar.g4` at unifica ea9c979).
 /// Ported from Java `UnificationGrammarLexerTests`, `ConstraintParsingTests`,
 /// `DefeasibleConstraintTests` and the grammar-text parts of
 /// `PlanConversionTests`, with the edge cases of the ANTLR lexer.
@@ -257,12 +257,30 @@ void main() {
         Repetition.plus(Nonterminal('B')),
         Repetition.optional(Nonterminal('C')),
         const Terminal('x', 'y'),
-        const TokenMatch('t'),
+        TokenMatch('t'),
         Nonterminal.withFeatures(
           'A',
           Structure.of({'n': const Variable(r'$N')}),
           'a',
         ),
+      ]);
+    });
+
+    test('testTokenFeatures', () {
+      final rhs = only(
+        'S --> {TOKEN}{cat: noun, num: \$N}:w {TOKEN} {TOKEN}{k: v};',
+        'S',
+      );
+      expect(rhs.rhs, [
+        TokenMatch(
+          'w',
+          Structure.of({
+            'cat': const StringConstant('noun'),
+            'num': const Variable(r'$N'),
+          }),
+        ),
+        TokenMatch(),
+        TokenMatch(null, Structure.of({'k': const StringConstant('v')})),
       ]);
     });
 

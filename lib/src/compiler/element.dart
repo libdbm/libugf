@@ -67,20 +67,27 @@ final class Anonymous extends Element {
   String toString() => 'Anonymous($category, $label)';
 }
 
-/// Any caller-supplied token, `{TOKEN}` (Java `Element.Token`).
+/// Any token, `{TOKEN}` (Java `Element.Token`), whose features must unify
+/// with [features] (S-F5); a token with features of its own that conflict
+/// does not fill it.
 final class Any extends Element {
-  /// Any token, with an optional [label].
-  const Any([this.label]);
+  /// Any token, with an optional [label] and [features], empty by default.
+  Any([this.label, Structure? features])
+    : features = features ?? Structure.empty;
 
   @override
   final String? label;
 
-  @override
-  bool operator ==(Object other) => other is Any && label == other.label;
+  /// The features a token must unify with.
+  final Structure features;
 
   @override
-  int get hashCode => Object.hash(Any, label);
+  bool operator ==(Object other) =>
+      other is Any && label == other.label && features == other.features;
 
   @override
-  String toString() => 'Any($label)';
+  int get hashCode => Object.hash(Any, label, features);
+
+  @override
+  String toString() => 'Any($label, ${features.display()})';
 }

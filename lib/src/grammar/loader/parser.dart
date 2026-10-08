@@ -322,13 +322,7 @@ final class GrammarParser {
     switch (token.type) {
       case TokenType.identifier:
         _advance();
-        final features =
-            _check(TokenType.lbrace) &&
-                _at(1).type == TokenType.identifier &&
-                _at(2).type == TokenType.colon
-            ? _structure()
-            : Structure.empty;
-        return Nonterminal(token.text, null, features);
+        return Nonterminal(token.text, null, _written());
       case TokenType.string:
         _advance();
         return Terminal(_unquote(token.text));
@@ -338,7 +332,7 @@ final class GrammarParser {
         return Regex(pattern);
       case TokenType.token:
         _advance();
-        return const TokenMatch();
+        return TokenMatch(null, _written());
       case TokenType.lbrace:
         _advance();
         final state = _expect(TokenType.identifier, 'IDENTIFIER').text;
@@ -348,6 +342,16 @@ final class GrammarParser {
         throw _Syntax(_mismatch('an element'));
     }
   }
+
+  /// The features written on a nonterminal or `{TOKEN}`, or empty: a `{`
+  /// opens them only when followed by `IDENTIFIER ':'`, which tells them
+  /// from a state annotation.
+  Structure _written() =>
+      _check(TokenType.lbrace) &&
+          _at(1).type == TokenType.identifier &&
+          _at(2).type == TokenType.colon
+      ? _structure()
+      : Structure.empty;
 
   RuleElement _labelled(RuleElement base) {
     if (!_match(TokenType.colon)) {
@@ -362,7 +366,7 @@ final class GrammarParser {
       ),
       Terminal(:final text) => Terminal(text, label),
       Regex(:final pattern) => Regex(pattern, label),
-      TokenMatch() => TokenMatch(label),
+      TokenMatch(:final features) => TokenMatch(label, features),
       _ => base,
     };
   }

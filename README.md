@@ -4,7 +4,7 @@ An Earley chart parser for unification grammars with weighted constraints, in pu
 and on the web (dart2js and dart2wasm).
 
 libugf conforms to Unifica SEMANTICS 2.0. It is the Dart port of the Java library
-[Unifica](https://github.com/libdbm/unifica) 2.0; both follow the same written semantics,
+[Unifica](https://github.com/libdbm/unifica) 2.1; both follow the same written semantics,
 [SEMANTICS.md](https://github.com/libdbm/unifica/blob/main/docs/SEMANTICS.md), and pass the same conformance corpus,
 so a grammar parses the same way in either.
 
@@ -144,6 +144,16 @@ identifier is an atom, whatever its case. Each use of a production has its own v
 right-hand side element must unify with the features of the constituent that fills it, and the resulting bindings
 hold for the rest of that production, including its constraints. Features are never copied implicitly from a child
 to its parent; a parent sees a child's features only through shared variables, as `$N` above.
+
+`{TOKEN}` takes features the same way, which is how a grammar reads the features of caller tokens, such as POS-tagged
+words, without giving each tag a category of its own:
+
+```
+Noun{lemma: $L, num: $N} --> {TOKEN}{cat: noun, lemma: $L, num: $N};
+```
+
+A token whose features conflict with those written on `{TOKEN}` does not fill it, and a feature the token does not
+have leaves its variable unbound.
 
 ### Constraints and costs
 
@@ -462,7 +472,7 @@ where a weight is attached to a predicate that is not registered.
 
 ## Coming from Java
 
-The Dart API follows Unifica 2.0. Every public Java type has a Dart counterpart; types not listed here have the same
+The Dart API follows Unifica 2.1. Every public Java type has a Dart counterpart; types not listed here have the same
 name and shape in both.
 
 ### General

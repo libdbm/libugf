@@ -410,10 +410,14 @@ final class Session {
       _Token(:final edge) => (_features(edge), edge.cost, edge.start),
     };
 
-    // S-F5: the features written on a named element unify with the child's,
+    // S-F5: the features written on the element unify with the child's,
     // under this use's bindings.
     var bindings = state.bindings;
-    if (element case Named(features: final written) when written.isNotEmpty) {
+    final written = switch (element) {
+      Named(:final features) || Any(:final features) => features,
+      Anonymous() => Structure.empty,
+    };
+    if (written.isNotEmpty) {
       _unifications++;
       final unified = Unifier.structures(written, features, bindings);
       if (_watched) {
@@ -439,7 +443,7 @@ final class Session {
           bindings = value.bindings;
         case Failure(:final error):
           _collector?.unification(
-            element.name,
+            _Collector._element(element),
             state.production.features,
             features,
             written,

@@ -220,7 +220,7 @@ void main() {
     test('testClassify', () {
       expect(classify([]), Kind.syntactic);
       expect(classify([Nonterminal('A')]), Kind.syntactic);
-      expect(classify([const TokenMatch()]), Kind.syntactic);
+      expect(classify([TokenMatch()]), Kind.syntactic);
       expect(
         classify([const Regex('[a-z]+'), Nonterminal('A')]),
         Kind.syntactic,

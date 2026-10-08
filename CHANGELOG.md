@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.0
+
+Follows Unifica 2.1.0 (commit `ea9c979`); the corpus adds the conformance case `feature-token-match`.
+
+- `{TOKEN}` takes a feature block, `{TOKEN}{cat: noun, lemma: $L}`, which unifies with the features of the token that
+  fills it (S-F5): a conflicting token does not fill it, and variables bind from the token for the rest of the
+  production. A `{TOKEN}` inside a group or repetition shares its variables with the enclosing production (S-G4), and
+  the linter counts them as bound.
+- `TokenMatch` and the compiled `Any` element have a `features` field, and their constructors are no longer `const`.
+
 ## 2.0.0
 
 The first published release: a pure Dart port of Unifica 2.0, conforming to Unifica SEMANTICS 2.0. It passes the

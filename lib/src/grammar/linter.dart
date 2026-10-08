@@ -277,9 +277,13 @@ final class GrammarLinter {
                 }
                 // Variables in its features are bound by unification (S-F5).
                 _variables(features, labels);
-              case Terminal(:final label?) ||
-                  Regex(:final label?) ||
-                  TokenMatch(:final label?):
+              case TokenMatch(:final label, :final features):
+                if (label != null) {
+                  labels.add(label);
+                }
+                // Variables in its features are bound by unification (S-F5).
+                _variables(features, labels);
+              case Terminal(:final label?) || Regex(:final label?):
                 labels.add(label);
               default:
                 break;

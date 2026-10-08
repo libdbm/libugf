@@ -67,6 +67,13 @@
     {"symbol": "S", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"nonterminal": "Q", "label": null, "features": {"m": {"v": {"v": "$X"}, "w": {"v": "$X"}}}}], "constraints": []},
     {"symbol": "P", "features": {"m": {"v": {"v": "$Y"}, "w": {"m": {"k": {"v": "$Y"}}}}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "p", "label": null}], "constraints": []},
     {"symbol": "Q", "features": {"m": {"v": {"v": "$Y"}, "w": {"v": "$Y"}}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "q", "label": null}], "constraints": []}]},
+  "cases/feature-token-match/grammar.ug": {"start": "s", "module": "", "exports": [], "skips": [], "whitespace": null, "imports": [], "rules": [
+    {"symbol": "s", "features": {"m": {"k": {"v": "$K"}}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"terminal": "p", "label": null}, {"token": null, "features": {"m": {"k": {"v": "$K"}}}}, {"token": null, "features": {"m": {"k": {"v": "$K"}}}}], "constraints": []},
+    {"symbol": "s", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"terminal": "n", "label": null}, {"token": null, "features": {"m": {"k": {"s": "one"}}}}], "constraints": []},
+    {"symbol": "s", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"terminal": "m", "label": null}, {"token": null, "features": {"m": {"k": {"v": "$K"}}}}], "constraints": [{"not": {"call": "is_bound", "args": [{"v": "$K"}]}}]},
+    {"symbol": "a", "features": {"m": {"k": {"s": "one"}}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "a1", "label": null}], "constraints": []},
+    {"symbol": "b", "features": {"m": {"k": {"s": "two"}}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "b2", "label": null}], "constraints": []},
+    {"symbol": "c", "features": {"m": {}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "c3", "label": null}], "constraints": []}]},
   "cases/feature-variables/grammar.ug": {"start": "s", "module": "", "exports": [], "skips": [], "whitespace": null, "imports": [], "rules": [
     {"symbol": "s", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"nonterminal": "w", "label": null, "features": {"m": {"v": {"s": "no"}}}}, {"nonterminal": "w", "label": null, "features": {"m": {"v": {"s": "yes"}}}}], "constraints": []},
     {"symbol": "s", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"terminal": "o", "label": null}, {"repetition": "?", "element": {"nonterminal": "x", "label": null, "features": {"m": {"open": {"s": "no"}}}}}], "constraints": []},
@@ -149,7 +156,7 @@
     {"symbol": "B", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"nonterminal": "X", "label": null, "features": {"m": {}}}], "constraints": []},
     {"symbol": "X", "features": {"m": {}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "x", "label": null}], "constraints": []}]},
   "cases/parse-tie-break-token/grammar.ug": {"start": "S", "module": "", "exports": [], "skips": [], "whitespace": null, "imports": [], "rules": [
-    {"symbol": "S", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"token": null}], "constraints": []},
+    {"symbol": "S", "features": {"m": {}}, "kind": "syntactic", "cost": 0, "transition": null, "rhs": [{"token": null, "features": {"m": {}}}], "constraints": []},
     {"symbol": "B", "features": {"m": {"k": {"s": "b"}}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "a", "label": null}], "constraints": []},
     {"symbol": "A", "features": {"m": {"k": {"s": "a"}}}, "kind": "lexical", "cost": 0, "transition": null, "rhs": [{"terminal": "a", "label": null}], "constraints": []}]},
   "cases/parse-tree-shape/grammar.ug": {"start": "S", "module": "", "exports": [], "skips": [], "whitespace": null, "imports": [], "rules": [

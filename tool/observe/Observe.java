@@ -161,7 +161,12 @@ public final class Observe {
       case RuleElement.Alternation alternation ->
           "{\"alternation\": " + elements(alternation.options()) + "}";
       case RuleElement.StateAnnotation annotation -> "{\"state\": " + string(annotation.state()) + "}";
-      case RuleElement.TokenMatch match -> "{\"token\": " + label(match.label()) + "}";
+      case RuleElement.TokenMatch match ->
+          "{\"token\": "
+              + label(match.label())
+              + ", \"features\": "
+              + value(match.features())
+              + "}";
     };
   }
 

@@ -227,9 +227,10 @@ final class StateAnnotation extends RuleElement {
 
 /// Token match - matches any token and binds its features.
 ///
-/// Used with constraints to filter by token properties:
+/// Features written on it unify with the token's, as a nonterminal's do with
+/// its constituent (S-F5), so they select tokens and bind variables:
 /// ```
-/// noun --> {TOKEN}:W where equals(W.cat, "NN");
+/// noun{lemma: $L} --> {TOKEN}{cat: noun, lemma: $L};
 /// ```
 ///
 /// The label binds the token's features for constraint evaluation.
@@ -237,25 +238,35 @@ final class TokenMatch extends RuleElement {
   /// The label binding the token's features in constraints, or null.
   final String? label;
 
-  /// A match of any token, with an optional [label].
-  const TokenMatch([this.label]);
+  /// The features the token must unify with.
+  final Structure features;
+
+  /// A match of any token, with an optional [label] and [features] (empty
+  /// when null).
+  TokenMatch([this.label, Structure? features])
+    : features = features ?? Structure.empty;
 
   /// Creates a copy with the given label.
-  TokenMatch withLabel(String label) => TokenMatch(label);
+  TokenMatch withLabel(String label) => TokenMatch(label, features);
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is TokenMatch && label == other.label;
+      identical(this, other) ||
+      other is TokenMatch && label == other.label && features == other.features;
 
   @override
-  int get hashCode => label.hashCode;
+  int get hashCode => Object.hash(TokenMatch, label, features);
 
   @override
   String toString() {
-    if (label != null) {
-      return '{TOKEN}:$label';
+    final buffer = StringBuffer('{TOKEN}');
+    if (features.isNotEmpty) {
+      buffer.write(features.display());
     }
-    return '{TOKEN}';
+    if (label != null) {
+      buffer.write(':$label');
+    }
+    return buffer.toString();
   }
 }
 

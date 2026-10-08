@@ -181,7 +181,7 @@ void main() {
       expect(compiled.lexical('A'), isTrue);
       expect(compiled.productionsFor('missing'), isEmpty);
       final production = compiled.productionsFor('S').single;
-      expect(production.rhs, [Named('A'), const Any('t')]);
+      expect(production.rhs, [Named('A'), Any('t')]);
       expect(production.auxiliary, isFalse);
       expect(
         lexemes(compiled, 'A').single.features,
@@ -389,7 +389,7 @@ void main() {
             GrammarRule(LHS('A'), [
               const Terminal('a'),
               Nonterminal('B'),
-              const TokenMatch(),
+              TokenMatch(),
             ], kind: Kind.lexical),
           )
           .add(GrammarRule.simple('B', [const Terminal('b')]))

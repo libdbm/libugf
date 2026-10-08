@@ -71,12 +71,12 @@ void main() {
     });
 
     test('TokenMatch creation', () {
-      final tm = const TokenMatch();
+      final tm = TokenMatch();
       expect(tm.label, isNull);
     });
 
     test('TokenMatch with label', () {
-      final tm = const TokenMatch('W');
+      final tm = TokenMatch('W');
       expect(tm.label, equals('W'));
     });
   });

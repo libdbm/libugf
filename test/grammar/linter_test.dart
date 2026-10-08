@@ -188,6 +188,18 @@ void main() {
         hasLength(1),
       );
     });
+
+    // S-F5: a variable written on {TOKEN} is bound by unification, so a
+    // constraint may use it. Ported from Java at unifica 3deed1f.
+    test('testTokenFeaturesBindVariables', () {
+      expect(
+        issues(
+          'start S; S --> {TOKEN}{num: \$N} where is_bound(\$N);',
+          'Unbound label in constraint',
+        ),
+        isEmpty,
+      );
+    });
   });
 
   group('nonterminals', () {
